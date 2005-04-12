@@ -92,16 +92,25 @@ setMethod("hyperedges", signature(.Object="hypergraph"),
 
 
 if (!isGeneric("nodes"))
-  setGeneric("nodes", function(.Object) standardGeneric("nodes"))
-setMethod("nodes", signature(.Object="hypergraph"), function(.Object) .Object@nodes)
+  setGeneric("nodes", function(object) standardGeneric("nodes"))
+setMethod("nodes", signature(object="hypergraph"), function(object) object@nodes)
 
 
 if (!isGeneric("numNodes"))
-  setGeneric("numNodes", function(.Object) standardGeneric("numNodes"))
-setMethod("numNodes", signature(.Object="hypergraph"),
-          function(.Object) length(.Object@nodes))
+  setGeneric("numNodes", function(object) standardGeneric("numNodes"))
+setMethod("numNodes", signature(object="hypergraph"),
+          function(object) length(object@nodes))
 
-         
+if (!isGeneric("inciMat"))
+  setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))
+setMethod("inciMat", signature(.Object="hypergraph"),
+          function(.Object) {
+              nds <- nodes(.Object)
+              hEdgeList <- hyperedges(.Object)
+              createInciMat(nds, hEdgeList)
+          })
+
+
 createInciMat <- function(nodes, edgeList) {
     inciMat <- matrix(0, nrow=length(nodes), ncol=length(edgeList))
     for (j in 1:length(edgeList)) {
@@ -143,3 +152,43 @@ checkValidHyperedges <- function(hyperedges, nodes) {
     TRUE
 }
 
+## Do we want toGraphNEL or as(hGraph, "graphNEL")
+## The former has a more compact signature, but is perhaps less standard?
+if (!isGeneric("toGraphNEL"))
+  setGeneric("toGraphNEL", function(.Object) standardGeneric("toGraphNEL"))
+setMethod("toGraphNEL", signature(.Object="hypergraph"),
+          function(.Object) {
+              hEdges <- hyperedges(.Object)
+              hEdgeNames <- names(hEdges)
+              if (is.null(hEdgeNames))
+                hEdgeNames <- as.character(1:length(hEdges))
+              if (any(hEdgeNames %in% nodes(.Object)))
+                stop("hyperedge names must be distinct from node names")
+              bpgNodes <- c(nodes(.Object), hEdgeNames)
+              heEdgeL <- lapply(hEdges, function(x) {
+                  list(edges=match(x, bpgNodes), weights=rep(1, length(x)))})
+              names(heEdgeL) <- hEdgeNames
+              hnEdgeL <- vector(mode="list", length=length(nodes(.Object)))
+              names(hnEdgeL) <- nodes(.Object)
+              for (i in 1:length(hEdges)) {
+                  he = hEdges[[i]]
+                  heNode <- hEdgeNames[i]
+                  heNodeIndex <- which(heNode == bpgNodes)
+                  for (n in he)
+                    hnEdgeL[[n]] <- append(hnEdgeL[[n]], heNodeIndex)
+              }
+              hnEdgeL <- lapply(hnEdgeL, function(x) {
+                  list(edges=x, weights=rep(1, length(x)))})
+              bpgEdgeL <- c(heEdgeL, hnEdgeL)
+              new("graphNEL", bpgNodes, bpgEdgeL)
+          })
+
+          
+
+        
+        
+
+    
+
+
+    

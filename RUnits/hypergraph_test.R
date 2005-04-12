@@ -57,3 +57,20 @@ testNumNodes <- function() {
     hg <- new("hypergraph", nodes=nodes, hyperedges=hyperedges)
     checkEquals(10, numNodes(hg))
 }
+
+testInciMat <- function() {
+    nodes <- letters[1:4]
+    hEdges <- list(c("a", "b"),
+                   c("b", "c"),
+                   c("c", "d", "a"))
+    hg <- new("hypergraph", nodes=nodes, hyperedges=hEdges)
+    mat <- inciMat(hg)
+    expected <- cbind(c(1, 1, 0, 0),
+                      c(0, 1, 1, 0),
+                      c(1, 0, 1, 1))
+    checkEquals(expected, mat)
+}
+
+testToGraphNEL <- function() {
+    TRUE
+}
