@@ -45,7 +45,7 @@ testBadHyperedges <- function() {
     hyperedges <- lapply(c(1:2, 1:3), "Hyperedge")
     checkException(new("hypergraph", nodes=nodes, hyperedges=hyperedges))
     
-    hyperedges <- lapply(c("A", c("A", "B"), c("C", "Z"), c("Q", "R", "S")), "Hyperedge")
+    hyperedges <- lapply(list("A", c("A", "B"), c("C", "Z"), c("Q", "R", "S")), "Hyperedge")
     checkException(new("hypergraph", nodes=nodes, hyperedges=hyperedges))
     
 }
@@ -60,9 +60,9 @@ testNumNodes <- function() {
 
 testInciMat <- function() {
     nodes <- letters[1:4]
-    hEdges <- list(c("a", "b"),
-                   c("b", "c"),
-                   c("c", "d", "a"))
+    hEdges <- lapply(list(c("a", "b"),
+                        c("b", "c"),
+                        c("c", "d", "a")), "Hyperedge")
     hg <- new("hypergraph", nodes=nodes, hyperedges=hEdges)
     mat <- inciMat(hg)
     expected <- cbind(c(1, 1, 0, 0),

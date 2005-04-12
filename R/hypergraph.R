@@ -12,14 +12,14 @@ Hyperedge <- function(nodes, label="")
 
 
 if (!isGeneric("nodes"))
-  setGeneric("nodes", function(.Object) standardGeneric("nodes"))
-setMethod("nodes", signature(.Object="Hyperedge"), function(.Object) .Object@head)
+  setGeneric("nodes", function(object) standardGeneric("nodes"))
+setMethod("nodes", signature(object="Hyperedge"), function(object) object@head)
 
 
 if (!isGeneric("label"))
-  setGeneric("label", function(.Object) standardGeneric("label"))
-setMethod("label", signature(.Object="Hyperedge"),
-          function(.Object) .Object@label)
+  setGeneric("label", function(object) standardGeneric("label"))
+setMethod("label", signature(object="Hyperedge"),
+          function(object) object@label)
 
 
 setMethod("show", signature(object="Hyperedge"),
@@ -45,8 +45,8 @@ DirectedHyperedge <- function(head, tail, label="")
   new("DirectedHyperedge", head=head, tail=tail, label=label)
 
 
-setMethod("nodes", signature(.Object="DirectedHyperedge"), function(.Object) {
-    c(.Object@tail, .Object@head)
+setMethod("nodes", signature(object="DirectedHyperedge"), function(object) {
+    c(object@tail, object@head)
 })
 
 
@@ -93,7 +93,9 @@ setMethod("hyperedges", signature(.Object="hypergraph"),
 
 if (!isGeneric("nodes"))
   setGeneric("nodes", function(object) standardGeneric("nodes"))
-setMethod("nodes", signature(object="hypergraph"), function(object) object@nodes)
+setMethod("nodes", signature(object="hypergraph"), function(object)
+          object@nodes)
+
 
 
 if (!isGeneric("numNodes"))
@@ -114,7 +116,7 @@ setMethod("inciMat", signature(.Object="hypergraph"),
 createInciMat <- function(nodes, edgeList) {
     inciMat <- matrix(0, nrow=length(nodes), ncol=length(edgeList))
     for (j in 1:length(edgeList)) {
-        col <- as.numeric(nodes %in% edgeList[[j]])
+        col <- as.numeric(nodes %in% nodes(edgeList[[j]]))
         inciMat[, j] <- col
     }
     rownames(inciMat) <- nodes
@@ -140,7 +142,7 @@ checkValidHyperedges <- function(hyperedges, nodes) {
     goodHyperedges <- lapply(hyperedges, is, "Hyperedge")
     if (!all(goodHyperedges))
       stop("hyperedge list elements must be instances of the Hyperedge class.")
-    hyperedgeSet <- sapply(hyperedges, nodes)
+    hyperedgeSet <- unlist(lapply(hyperedges, nodes))
     unknownNodes <- !(hyperedgeSet %in% nodes)
     if (any(unknownNodes)) {
         unknownNodes <- hyperedgeSet[unknownNodes]

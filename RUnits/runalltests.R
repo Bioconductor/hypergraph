@@ -24,5 +24,9 @@ suite <- defineTestSuite(name="hypergraph Test Suite",
                          dirs=runitDirs,
                          testFileRegexp=runitPat)
 result <- runTestSuite(suite)
+
 printTextProtocol(result, showDetails=FALSE)
-printTextProtocol(result, showDetails=TRUE, fileName="runit-result.txt")
+
+nil <- printTextProtocol(result, showDetails=TRUE,
+                         fileName="runit-result.txt")
+
