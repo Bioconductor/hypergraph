@@ -82,30 +82,30 @@ setMethod("show", "DirectedHyperedge", function(object) {
     
 
 
-setClass("hypergraph", representation(nodes="character", hyperedges="list"))
+setClass("Hypergraph", representation(nodes="character", hyperedges="list"))
 
 
 if (!isGeneric("hyperedges"))
   setGeneric("hyperedges", function(.Object) standardGeneric("hyperedges"))
-setMethod("hyperedges", signature(.Object="hypergraph"),
+setMethod("hyperedges", signature(.Object="Hypergraph"),
           function(.Object) .Object@hyperedges)
 
 
 if (!isGeneric("nodes"))
   setGeneric("nodes", function(object) standardGeneric("nodes"))
-setMethod("nodes", signature(object="hypergraph"), function(object)
+setMethod("nodes", signature(object="Hypergraph"), function(object)
           object@nodes)
 
 
 
 if (!isGeneric("numNodes"))
   setGeneric("numNodes", function(object) standardGeneric("numNodes"))
-setMethod("numNodes", signature(object="hypergraph"),
+setMethod("numNodes", signature(object="Hypergraph"),
           function(object) length(object@nodes))
 
 if (!isGeneric("inciMat"))
   setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))
-setMethod("inciMat", signature(.Object="hypergraph"),
+setMethod("inciMat", signature(.Object="Hypergraph"),
           function(.Object) {
               nds <- nodes(.Object)
               hEdgeList <- hyperedges(.Object)
@@ -124,7 +124,7 @@ createInciMat <- function(nodes, edgeList) {
 }
 
 
-setMethod("initialize", "hypergraph", function(.Object, nodes, hyperedges) {
+setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
     ## Create a new hypergraph instance.
     ##
     ##      nodes: character vector of node names
@@ -158,7 +158,7 @@ checkValidHyperedges <- function(hyperedges, nodes) {
 ## The former has a more compact signature, but is perhaps less standard?
 if (!isGeneric("toGraphNEL"))
   setGeneric("toGraphNEL", function(.Object) standardGeneric("toGraphNEL"))
-setMethod("toGraphNEL", signature(.Object="hypergraph"),
+setMethod("toGraphNEL", signature(.Object="Hypergraph"),
           function(.Object) {
               hEdges <- hyperedges(.Object)
               hEdgeNames <- names(hEdges)
