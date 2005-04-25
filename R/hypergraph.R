@@ -136,6 +136,10 @@ setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
     .Object@hyperedges = hyperedges
     .Object
 })
+Hypergraph <- function(nodes, hyperedges) {
+    ## Convenience function to create Hypergraph instances
+    new("Hypergraph", nodes=nodes, hyperedges=hyperedges)
+}
 
 checkValidHyperedges <- function(hyperedges, nodes) {
     
