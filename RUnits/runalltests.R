@@ -27,6 +27,5 @@ result <- runTestSuite(suite)
 
 printTextProtocol(result, showDetails=FALSE)
 
-nil <- printTextProtocol(result, showDetails=TRUE,
-                         fileName="runit-result.txt")
+nil <- printHTMLProtocol(result, fileName="runit-result.html")
 

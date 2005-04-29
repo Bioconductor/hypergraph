@@ -47,6 +47,7 @@ instances.  This is especially useful for creating a list of
 \examples{
 nodes <- LETTERS[1:4]
 label <- "Simple hyperedge"
-he <- new("Hyperedge", nodes=nodes, label=label)
+## Use the convenience constructor
+he <- Hyperedge(nodes, label)
 }
 \keyword{classes}

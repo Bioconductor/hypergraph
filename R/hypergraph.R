@@ -10,7 +10,7 @@ setMethod("initialize", "Hyperedge",
               .Object
           })
 Hyperedge <- function(nodes, label="")
-  new("Hyperedge", nodes=nodes, label=label)
+  new("Hyperedge", head=nodes, label=label)
 
 
 if (!isGeneric("nodes"))
@@ -64,16 +64,14 @@ setMethod("toUndirected", signature(.Object="DirectedHyperedge"),
 ## defined as generics returning the first "chunk" of vectors and data frames.
 ## So I have to match the arg names and "..." even though I want nothing to do
 ## with them!
-if (!isGeneric("head"))
-  setGeneric("head", function(x, ...) standardGeneric("head"))
-setMethod("head", signature(x="DirectedHyperedge"),
-          function(x, ...) x@head)
+setGeneric("head", function(.Object) standardGeneric("head"))
+setMethod("head", signature(.Object="DirectedHyperedge"),
+          function(.Object) .Object@head)
 
 
-if (!isGeneric("tail"))
-  setGeneric("tail", function(x, ...) standardGeneric("tail"))
-setMethod("tail", signature(x="DirectedHyperedge"),
-          function(x, ...) x@tail)
+setGeneric("tail", function(.Object) standardGeneric("tail"))
+setMethod("tail", signature(.Object="DirectedHyperedge"),
+          function(.Object) .Object@tail)
 
 
 setMethod("show", "DirectedHyperedge", function(object) {
@@ -87,17 +85,17 @@ setMethod("show", "DirectedHyperedge", function(object) {
 setClass("Hypergraph", representation(nodes="character", hyperedges="list"))
 
 
-if (!isGeneric("hyperedges"))
-  setGeneric("hyperedges", function(.Object) standardGeneric("hyperedges"))
+setGeneric("hyperedges", function(.Object) standardGeneric("hyperedges"))
 setMethod("hyperedges", signature(.Object="Hypergraph"),
           function(.Object) .Object@hyperedges)
 
 
+## FIXME: How do I ask for the generic from the graph package.  Want to use it
+## if available and otherwise define my own.  Same with numNodes
 if (!isGeneric("nodes"))
   setGeneric("nodes", function(object) standardGeneric("nodes"))
 setMethod("nodes", signature(object="Hypergraph"), function(object)
           object@nodes)
-
 
 
 if (!isGeneric("numNodes"))
@@ -105,8 +103,8 @@ if (!isGeneric("numNodes"))
 setMethod("numNodes", signature(object="Hypergraph"),
           function(object) length(object@nodes))
 
-if (!isGeneric("inciMat"))
-  setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))
+
+setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))
 setMethod("inciMat", signature(.Object="Hypergraph"),
           function(.Object) {
               nds <- nodes(.Object)

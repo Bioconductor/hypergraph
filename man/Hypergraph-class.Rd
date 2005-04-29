@@ -2,11 +2,15 @@
 \docType{class}
 \alias{Hypergraph-class}
 \alias{hyperedges,Hypergraph-method}
+\alias{inciMat}
 \alias{inciMat,Hypergraph-method}
 \alias{initialize,Hypergraph-method}
 \alias{nodes,Hypergraph-method}
 \alias{numNodes,Hypergraph-method}
+\alias{toGraphNEL}
 \alias{toGraphNEL,Hypergraph-method}
+\alias{hyperedges}
+\alias{hyperedges,Hypergraph-method}
 
 \title{Class Hypergraph}
 \description{A hypergraph consists of a set of nodes and a set of

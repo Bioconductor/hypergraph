@@ -1,11 +1,14 @@
 \name{DirectedHyperedge-class}
 \docType{class}
 \alias{DirectedHyperedge-class}
-\alias{head,DirectedHyperedge-method}
 \alias{initialize,DirectedHyperedge-method}
 \alias{nodes,DirectedHyperedge-method}
 \alias{show,DirectedHyperedge-method}
+\alias{head}
+\alias{head,DirectedHyperedge-method}
+\alias{tail}
 \alias{tail,DirectedHyperedge-method}
+\alias{toUndirected}
 \alias{toUndirected,DirectedHyperedge-method}
 
 \title{Class DirectedHyperedge}
@@ -30,18 +33,23 @@ Class \code{"Hyperedge"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{head}{\code{signature(x = "DirectedHyperedge")}: Return a
-    vector containing the nodes in the head of the hyperedge}
+    \item{head}{\code{signature(.Object = "DirectedHyperedge")}: Return a
+      vector containing the nodes in the head of the hyperedge}
+
+    \item{tail}{\code{signature(.Object = "DirectedHyperedge")}: Return a
+      vector containing the nodes in the tail of the hyperedge}
+
     \item{initialize}{\code{signature(.Object = "DirectedHyperedge")}:
-    Create a new instance.}
+      Create a new instance.}
+
     \item{nodes}{\code{signature(object = "DirectedHyperedge")}: Return
-    a vector containing all nodes present in the hyperedge.}
+      a vector containing all nodes present in the hyperedge.}
+
     \item{show}{\code{signature(object = "DirectedHyperedge")}: Print me }
-    \item{tail}{\code{signature(x = "DirectedHyperedge")}: Return a
-    vector containing the nodes in the tail of the hyperedge}
+
     \item{toUndirected}{\code{signature(.Object = "DirectedHyperedge")}:
-    Return a \code{\link{Hyperedge-class}} object that results from
-    coercing to an undirected hyperedge.}
+      Return a \code{\link{Hyperedge-class}} object that results from
+      coercing to an undirected hyperedge.}
   }
 }
 \author{Seth Falcon}
