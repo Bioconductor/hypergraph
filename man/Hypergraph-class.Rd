@@ -51,7 +51,7 @@ argument must be a list of \code{\link{Hyperedge-class}} objects.
 \seealso{
   \code{\link{Hyperedge-class}}
   \code{\link{DirectedHyperedge-class}}
-  \code{\link{graphNEL-class}}
+  \code{\link[graph]{graphNEL-class}}
 }
 \examples{
 nodes <- LETTERS[1:4]
