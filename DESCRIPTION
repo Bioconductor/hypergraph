@@ -1,12 +1,12 @@
 Package: hypergraph
-Title: A package providing hypergraph data structures
-Version: 1.1.0
+Title: A package providing hypergraph data structures and algorithms
+Version: 1.1.1
 Date: 2005-03-23
 Author: Seth Falcon, R. Gentleman
 Description: A package that implements some simple capabilities for
         representing and manipulating hypergraphs.
 Maintainer: Seth Falcon <sfalcon@fhcrc.org>
 License: LGPL
-Depends: R (>= 2.1.0), graph
+Depends: R (>= 2.1.0), graph, methods
 SaveImage: yes
 

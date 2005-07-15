@@ -1,8 +1,14 @@
 import(methods, graph)
 
-exportClasses(Hypergraph, Hyperedge, DirectedHyperedge)
+exportClasses(Hypergraph, Hyperedge, DirectedHyperedge,
+              CategoryMatrix, SharedItemSet)
 
 exportMethods(nodes, label, show, toUndirected, head, tail, hyperedges,
-              numNodes, inciMat, toGraphNEL)
+              numNodes, inciMat, toGraphNEL, items, "items<-", categories,
+              "categories<-", "[", length, dim, dimnames, inciMat,
+              findSharedItemSets, initialize)
 
-export(Hypergraph, Hyperedge, DirectedHyperedge)
+
+export(Hypergraph, Hyperedge, DirectedHyperedge, SharedItemSet,
+       CategoryMatrix)
+
