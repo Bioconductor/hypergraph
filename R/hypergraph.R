@@ -10,7 +10,7 @@ setMethod("initialize", "Hyperedge",
               .Object
           })
 Hyperedge <- function(nodes, label="")
-  new("Hyperedge", head=nodes, label=label)
+  new("Hyperedge", nodes=nodes, label=label)
 
 
 if (!isGeneric("nodes"))
