@@ -1,6 +1,6 @@
 simpleHypergraph <- function() {
     nodes <- LETTERS[1:4]
-    hEdges <- lapply(c("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
+    hEdges <- lapply(list("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
     hg <- new("Hypergraph", nodes=nodes, hyperedges=hEdges)
 }    
 
@@ -74,5 +74,20 @@ testInciMat <- function() {
 }
 
 testToGraphNEL <- function() {
-    TRUE
+    hg <- simpleHypergraph()
+    bpg <- toGraphNEL(hg)
+    checkEquals(7, length(nodes(bpg)))
+    checkEquals(5, numEdges(bpg))
+
+    expectEdges <- list(A=c("1", "2"),
+                        B="2",
+                        C="3",
+                        D="3",
+                        "1"="A",
+                        "2"=c("A", "B"),
+                        "3"=c("C", "D"))
+    bpEdges <- edges(bpg)
+    checkEquals(expectEdges, bpEdges)
+    expectNodes <- c(LETTERS[1:4], 1:3)
+    checkEquals(expectNodes, nodes(bpg))
 }

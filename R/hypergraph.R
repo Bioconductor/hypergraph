@@ -10,7 +10,7 @@ setMethod("initialize", "Hyperedge",
               .Object
           })
 Hyperedge <- function(nodes, label="")
-  new("Hyperedge", head=nodes, label=label)
+  new("Hyperedge", nodes=nodes, label=label)
 
 
 if (!isGeneric("nodes"))
@@ -123,26 +123,7 @@ createInciMat <- function(nodes, edgeList) {
     inciMat
 }
 
-
-setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
-    ## Create a new hypergraph instance.
-    ##
-    ##      nodes: character vector of node names
-    ##
-    ## hyperedges: a list of character vectors describing subsets of the nodes.
-    ##
-    .Object@nodes = nodes
-    checkValidHyperedges(hyperedges, nodes)
-    .Object@hyperedges = hyperedges
-    .Object
-})
-Hypergraph <- function(nodes, hyperedges) {
-    ## Convenience function to create Hypergraph instances
-    new("Hypergraph", nodes=nodes, hyperedges=hyperedges)
-}
-
 checkValidHyperedges <- function(hyperedges, nodes) {
-    
     goodHyperedges <- lapply(hyperedges, is, "Hyperedge")
     if (!all(goodHyperedges))
       stop("hyperedge list elements must be instances of the Hyperedge class.")
@@ -158,8 +139,24 @@ checkValidHyperedges <- function(hyperedges, nodes) {
     TRUE
 }
 
-## Do we want toGraphNEL or as(hGraph, "graphNEL")
-## The former has a more compact signature, but is perhaps less standard?
+setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
+    ## Create a new hypergraph instance.
+    ##
+    ##      nodes: character vector of node names
+    ##
+    ## hyperedges: a list of character vectors describing subsets of the nodes.
+    ##
+    .Object@nodes = nodes
+    hypergraph:::checkValidHyperedges(hyperedges, nodes)
+    .Object@hyperedges = hyperedges
+    .Object
+})
+Hypergraph <- function(nodes, hyperedges) {
+    ## Convenience function to create Hypergraph instances
+    new("Hypergraph", nodes=nodes, hyperedges=hyperedges)
+}
+
+
 if (!isGeneric("toGraphNEL"))
   setGeneric("toGraphNEL", function(.Object) standardGeneric("toGraphNEL"))
 setMethod("toGraphNEL", signature(.Object="Hypergraph"),
@@ -172,7 +169,7 @@ setMethod("toGraphNEL", signature(.Object="Hypergraph"),
                 stop("hyperedge names must be distinct from node names")
               bpgNodes <- c(nodes(.Object), hEdgeNames)
               heEdgeL <- lapply(hEdges, function(x) {
-                  list(edges=match(x, bpgNodes), weights=rep(1, length(x)))})
+                  list(edges=match(nodes(x), bpgNodes), weights=rep(1, length(nodes(x))))})
               names(heEdgeL) <- hEdgeNames
               hnEdgeL <- vector(mode="list", length=length(nodes(.Object)))
               names(hnEdgeL) <- nodes(.Object)
@@ -180,7 +177,7 @@ setMethod("toGraphNEL", signature(.Object="Hypergraph"),
                   he = hEdges[[i]]
                   heNode <- hEdgeNames[i]
                   heNodeIndex <- which(heNode == bpgNodes)
-                  for (n in he)
+                  for (n in nodes(he))
                     hnEdgeL[[n]] <- append(hnEdgeL[[n]], heNodeIndex)
               }
               hnEdgeL <- lapply(hnEdgeL, function(x) {

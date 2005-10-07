@@ -3,6 +3,6 @@ import(methods, graph)
 exportClasses(Hypergraph, Hyperedge, DirectedHyperedge)
 
 exportMethods(nodes, label, show, toUndirected, head, tail, hyperedges,
-              numNodes, inciMat, toGraphNEL)
+              numNodes, inciMat, initialize, toGraphNEL)
 
 export(Hypergraph, Hyperedge, DirectedHyperedge)

@@ -50,7 +50,6 @@ argument must be a list of \code{\link{Hyperedge-class}} objects.
   }
 }
 \author{Seth Falcon}
-\note{ ~~further notes~~ }
 
 \seealso{
   \code{\link{Hyperedge-class}}
@@ -59,7 +58,7 @@ argument must be a list of \code{\link{Hyperedge-class}} objects.
 }
 \examples{
 nodes <- LETTERS[1:4]
-hEdges <- lapply(c("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
+hEdges <- lapply(list("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
 hg <- new("Hypergraph", nodes=nodes, hyperedges=hEdges)
 }
 \keyword{classes}
