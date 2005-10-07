@@ -2,10 +2,17 @@ testHyperedge <- function() {
     nodes <- LETTERS[1:4]
     label <- "Simple hyperedge"
     he <- new("Hyperedge", nodes=nodes, label=label)
+    checkEquals(nodes, nodes(he))
+    checkEquals(label, label(he))
+
+    ## change label
+    label(he) <- "newone"
+    checkEquals("newone", label(he))
+    
     ## check that we can omit the label
     he2 <- new("Hyperedge", nodes=nodes) 
-    checkEquals(nodes, nodes(he))
     checkEquals(nodes, nodes(he2))
+    checkEquals(TRUE, is.na(label(he2)))
 }
 
 

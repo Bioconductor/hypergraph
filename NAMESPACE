@@ -2,7 +2,7 @@ import(methods, graph)
 
 exportClasses(Hypergraph, Hyperedge, DirectedHyperedge)
 
-exportMethods(nodes, label, show, toUndirected, head, tail, hyperedges,
-              numNodes, inciMat, initialize, toGraphNEL)
+exportMethods(nodes, label, "label<-", show, toUndirected, head, tail, hyperedges,
+              numNodes, inciMat, initialize, toGraphNEL, hyperedgeLabels)
 
-export(Hypergraph, Hyperedge, DirectedHyperedge)
+export(Hypergraph, Hyperedge, DirectedHyperedge, l2hel)

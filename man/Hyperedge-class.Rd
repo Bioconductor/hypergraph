@@ -3,6 +3,8 @@
 \alias{Hyperedge-class}
 \alias{initialize,Hyperedge-method}
 \alias{label,Hyperedge-method}
+\alias{label<-}
+\alias{label<-,Hyperedge,character-method}
 \alias{nodes,Hyperedge-method}
 \alias{show,Hyperedge-method}
 
@@ -30,7 +32,9 @@ instances.  This is especially useful for creating a list of
     \item{initialize}{\code{signature(.Object = "Hyperedge")}: Create an
     instance}
     \item{label}{\code{signature(object = "Hyperedge")}: Return the
-    value of the \code{label} slot }
+      value of the \code{label} slot }
+    \item{label<-}{\code{signature(object = "Hyperedge", value =
+    "character")}: Set the label slot.}
     \item{nodes}{\code{signature(object = "Hyperedge")}: Return a
     vector containing the nodes in the hyperedge }
     \item{show}{\code{signature(object = "Hyperedge")}: Print a textual

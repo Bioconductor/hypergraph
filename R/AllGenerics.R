@@ -12,6 +12,10 @@ if (!isGeneric("label"))
   setGeneric("label", function(object) standardGeneric("label"))
 
 
+if (!isGeneric("label<-"))
+setGeneric("label<-", function(object, value) standardGeneric("label<-"))
+
+
 setGeneric("toUndirected", function(.Object) standardGeneric("toUndirected"))
 
 
@@ -22,6 +26,10 @@ setGeneric("tail", function(.Object) standardGeneric("tail"))
 
 
 setGeneric("hyperedges", function(.Object) standardGeneric("hyperedges"))
+
+
+setGeneric("hyperedgeLabels",
+           function(.Object) standardGeneric("hyperedgeLabels"))
 
 
 setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))

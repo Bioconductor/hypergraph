@@ -11,6 +11,8 @@
 \alias{toGraphNEL,Hypergraph-method}
 \alias{hyperedges}
 \alias{hyperedges,Hypergraph-method}
+\alias{hyperedgeLabels}
+\alias{hyperedgeLabels,Hypergraph-method}
 
 \title{Class Hypergraph}
 \description{A hypergraph consists of a set of nodes and a set of
@@ -35,7 +37,12 @@ argument must be a list of \code{\link{Hyperedge-class}} objects.
 \section{Methods}{
   \describe{
     \item{hyperedges}{\code{signature(.Object = "Hypergraph")}: Return
-    the list of \code{Hyperedge} objects }
+      the list of \code{Hyperedge} objects }
+
+    \item{hyperedgeLabels}{\code{signature(.Object = "Hypergraph")}: Return
+      a character vector of labels for the \code{Hyperedge} objects in the
+      hypergraph.}
+
     \item{inciMat}{\code{signature(.Object = "Hypergraph")}: Return the
     incidence matrix representation of this hypergraph }
     \item{initialize}{\code{signature(.Object = "Hypergraph")}: Create

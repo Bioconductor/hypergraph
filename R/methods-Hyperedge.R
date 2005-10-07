@@ -1,7 +1,11 @@
 ## Hyperedge methods
 setMethod("initialize", "Hyperedge",
-          function(.Object, nodes, label="") {
+          function(.Object, nodes, label) {
               .Object@head <- as.character(nodes)
+              if (missing(label)) {
+                  label <- ""
+                  label[1] <- NA ## want an NA of type character
+              }
               .Object@label <- label
               .Object
           })
@@ -9,16 +13,15 @@ Hyperedge <- function(nodes, label="")
   new("Hyperedge", nodes=nodes, label=label)
 
 
-l2hel <- function(e, labels) {
+l2hel <- function(e) {
     ## Convenience function to create lists of Hyperedges
     numEdges <- length(e)
-    if (missing(labels))
-      labels <- as.character(1:numEdges)
-    if (numEdges != length(labels))
-      stop("e and labels must have the same length")
     hel <- vector(mode="list", length=numEdges)
-    for (i in 1:numEdges)
-        hel[[i]] <- Hyperedge(nodes=e[[i]], label=labels[i])
+    nms <- names(e)
+    if (is.null(nms))
+      nms <- as.character(1:numEdges)
+    for (i in 1:numEdges) 
+      hel[[i]] <- Hyperedge(nodes=e[[i]], label=nms[i])
     hel
 }
 
@@ -28,6 +31,15 @@ setMethod("nodes", signature(object="Hyperedge"), function(object) object@head)
 
 setMethod("label", signature(object="Hyperedge"),
           function(object) object@label)
+
+
+setReplaceMethod("label", signature(object="Hyperedge", value="character"),
+                 function(object, value) {
+                     if (length(value) != 1)
+                       stop("Labels for Hyperedges must be character vectors of length 1")
+                     object@label <- value
+                     object
+                 })
 
 
 setMethod("show", signature(object="Hyperedge"),

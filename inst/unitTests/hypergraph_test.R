@@ -7,6 +7,7 @@ simpleHypergraph <- function() {
 
 testConstruction <- function() {
     hg <- simpleHypergraph()
+    checkEquals(TRUE, is(hg, "Hypergraph"))
 }
 
 
@@ -18,14 +19,33 @@ testDirectedHypergraph <- function() {
     dhe4 <- DirectedHyperedge(tail=c("a"), head=c("b"))
     hg <- new("Hypergraph", nodes=nodes,
               hyperedges=list(dhe1, dhe2, dhe3, dhe4))
+    checkEquals(TRUE, is(hg, "Hypergraph"))
 }
  
 
 testHyperedges <- function() {
     nodes <- LETTERS[1:4]
-    hEdges <- lapply(c("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
+##    hEdges <- lapply(list("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
+    eList <- list("A", LETTERS[1:2], LETTERS[3:4])
+    hEdges <- l2hel(eList)
     hg <- new("Hypergraph", nodes=nodes, hyperedges=hEdges)
+    ## Add "default" labels
+    for (i in 1:length(hEdges)) {
+        he <- hEdges[[i]]
+        label(he) <- as.character(i)
+        hEdges[[i]] <- he
+    }
     checkEquals(hEdges, hyperedges(hg))
+    names(eList) <- paste("e", 1:length(eList), sep="")
+    hEdges <- l2hel(eList)
+    checkEquals(names(eList), hyperedgeLabels(hg))
+}
+
+
+testHyperedgeLabels <- function() {
+    hg <- simpleHypergraph()
+    expect <- as.character(1:3)
+    checkEquals(expect, hyperedgeLabels(hg))
 }
 
 
@@ -42,7 +62,7 @@ testBadHyperedges <- function() {
     hyperedges <- list(matrix(0, nrow=2, ncol=2))
     checkException(new("Hypergraph", nodes=nodes, hyperedges=hyperedges))
 
-    hyperedges <- lapply(c(1:2, 1:3), "Hyperedge")
+    hyperedges <- lapply(list(1:2, 1:3), "Hyperedge")
     checkException(new("Hypergraph", nodes=nodes, hyperedges=hyperedges))
     
     hyperedges <- lapply(list("A", c("A", "B"),
@@ -96,22 +116,23 @@ testToGraphNEL <- function() {
     checkEquals(expectNodes, nodes(bpg))
 }
 
-testToGraphAM <- function() {
-    hg <- simpleHypergraph()
-    bpg <- toGraphAM(hg)
-    checkEquals(TRUE, is(bpg, "graphAM"))
-    checkEquals(7, length(nodes(bpg)))
-    checkEquals(5, numEdges(bpg))
 
-    expectEdges <- list(A=c("1", "2"),
-                        B="2",
-                        C="3",
-                        D="3",
-                        "1"="A",
-                        "2"=c("A", "B"),
-                        "3"=c("C", "D"))
-    bpEdges <- edges(bpg)
-    checkEquals(expectEdges, bpEdges)
-    expectNodes <- c(LETTERS[1:4], 1:3)
-    checkEquals(expectNodes, nodes(bpg))
-}    
+## testToGraphAM <- function() {
+##     hg <- simpleHypergraph()
+##     bpg <- toGraphAM(hg)
+##     checkEquals(TRUE, is(bpg, "graphAM"))
+##     checkEquals(7, length(nodes(bpg)))
+##     checkEquals(5, numEdges(bpg))
+
+##     expectEdges <- list(A=c("1", "2"),
+##                         B="2",
+##                         C="3",
+##                         D="3",
+##                         "1"="A",
+##                         "2"=c("A", "B"),
+##                         "3"=c("C", "D"))
+##     bpEdges <- edges(bpg)
+##     checkEquals(expectEdges, bpEdges)
+##     expectNodes <- c(LETTERS[1:4], 1:3)
+##     checkEquals(expectNodes, nodes(bpg))
+## }    

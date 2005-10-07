@@ -7,6 +7,7 @@ setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
     ##
     .Object@nodes = nodes
     hypergraph:::checkValidHyperedges(hyperedges, nodes)
+    hyperedges <- addDefaultHyperedgeLabels(hyperedges)
     .Object@hyperedges = hyperedges
     .Object
 })
@@ -35,9 +36,26 @@ checkValidHyperedges <- function(hyperedges, nodes) {
 }
 
 
+addDefaultHyperedgeLabels <- function(hyperedges) {
+    for (i in 1:length(hyperedges)) {
+        hEdge <- hyperedges[[i]]
+        lab <- label(hEdge)
+        if (is.null(lab) || length(lab) < 1 || lab == "") {
+            lab <- as.character(i)
+            label(hEdge) <- lab
+            hyperedges[[i]] <- hEdge
+        }
+    }
+    hyperedges
+}
+        
 
 setMethod("hyperedges", signature(.Object="Hypergraph"),
           function(.Object) .Object@hyperedges)
+
+
+setMethod("hyperedgeLabels", signature(.Object="Hypergraph"),
+          function(.Object) sapply(.Object@hyperedges, label))
 
 
 setMethod("nodes", signature(object="Hypergraph"), function(object)
