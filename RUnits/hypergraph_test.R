@@ -70,12 +70,16 @@ testInciMat <- function() {
     expected <- cbind(c(1, 1, 0, 0),
                       c(0, 1, 1, 0),
                       c(1, 0, 1, 1))
+    rownames(expected) <- nodes
+    colnames(expected) <- as.character(1:length(hEdges))
     checkEquals(expected, mat)
+    checkEquals(dimnames(expected), dimnames(mat))
 }
 
 testToGraphNEL <- function() {
     hg <- simpleHypergraph()
     bpg <- toGraphNEL(hg)
+    checkEquals(TRUE, is(bpg, "graphNEL"))
     checkEquals(7, length(nodes(bpg)))
     checkEquals(5, numEdges(bpg))
 
@@ -91,3 +95,23 @@ testToGraphNEL <- function() {
     expectNodes <- c(LETTERS[1:4], 1:3)
     checkEquals(expectNodes, nodes(bpg))
 }
+
+testToGraphAM <- function() {
+    hg <- simpleHypergraph()
+    bpg <- toGraphAM(hg)
+    checkEquals(TRUE, is(bpg, "graphAM"))
+    checkEquals(7, length(nodes(bpg)))
+    checkEquals(5, numEdges(bpg))
+
+    expectEdges <- list(A=c("1", "2"),
+                        B="2",
+                        C="3",
+                        D="3",
+                        "1"="A",
+                        "2"=c("A", "B"),
+                        "3"=c("C", "D"))
+    bpEdges <- edges(bpg)
+    checkEquals(expectEdges, bpEdges)
+    expectNodes <- c(LETTERS[1:4], 1:3)
+    checkEquals(expectNodes, nodes(bpg))
+}    

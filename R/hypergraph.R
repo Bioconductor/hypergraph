@@ -12,6 +12,17 @@ setMethod("initialize", "Hyperedge",
 Hyperedge <- function(nodes, label="")
   new("Hyperedge", nodes=nodes, label=label)
 
+l2hel <- function(e, labels) {
+    numEdges <- length(e)
+    if (missing(labels))
+      labels <- as.character(1:numEdges)
+    if (numEdges != length(labels))
+      stop("e and labels must have the same length")
+    hel <- vector(mode="list", length=numEdges)
+    for (i in 1:numEdges)
+        hel[[i]] <- Hyperedge(nodes=e[[i]], label=labels[i])
+    hel
+}
 
 if (!isGeneric("nodes"))
   setGeneric("nodes", function(object) standardGeneric("nodes"))
@@ -60,10 +71,6 @@ setMethod("toUndirected", signature(.Object="DirectedHyperedge"),
           })
           
 
-## XXX: YUCK! I'm not grocking the generic function thing.  head, tail are
-## defined as generics returning the first "chunk" of vectors and data frames.
-## So I have to match the arg names and "..." even though I want nothing to do
-## with them!
 setGeneric("head", function(.Object) standardGeneric("head"))
 setMethod("head", signature(.Object="DirectedHyperedge"),
           function(.Object) .Object@head)
@@ -120,6 +127,7 @@ createInciMat <- function(nodes, edgeList) {
         inciMat[, j] <- col
     }
     rownames(inciMat) <- nodes
+    colnames(inciMat) <- sapply(edgeList, label)
     inciMat
 }
 
