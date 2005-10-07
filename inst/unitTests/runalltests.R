@@ -2,7 +2,7 @@ require("RUnit", quietly=TRUE) || stop("RUnit package not found")
 require("hypergraph")
 
 ## Override checkException so that it will be quiet
-checkException <- function (expr, msg, silent=TRUE) {
+myCheckException <- function (expr, msg, silent=TRUE) {
     if (exists(".testLogger", envir = .GlobalEnv)) {
         .testLogger$incrementCheckNum()
     }
