@@ -12,4 +12,4 @@ SaveImage: yes
 Collate: AllClasses.R AllGenerics.R
          methods-Hyperedge.R 
          methods-Hypergraph.R
-
+biocViews: Infrastructure, GraphsAndNetworks
