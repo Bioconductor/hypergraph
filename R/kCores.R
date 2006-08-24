@@ -110,7 +110,7 @@ kCoresHypergraph <- function(hg)
 #      }
 #   }
 #   
-vCoverHypergraph <- function(hypergraph, k)
+vCoverHypergraph <- function(hypergraph)
 {
 }
 

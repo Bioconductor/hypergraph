@@ -15,8 +15,10 @@ exportMethods(
    inciMat, 
    initialize, 
    toGraphNEL, 
-   hyperedgeLabels,
+   hyperedgeLabels
+)
 
+export(
    kCoresHypergraph,
    vCoverHypergraph
 )
