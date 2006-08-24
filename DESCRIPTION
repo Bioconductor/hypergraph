@@ -1,6 +1,6 @@
 Package: hypergraph
 Title: A package providing hypergraph data structures
-Version: 1.5.0
+Version: 1.5.1
 Date: 2005-03-23
 Author: Seth Falcon, Robert Gentleman
 Description: A package that implements some simple capabilities for
@@ -9,7 +9,9 @@ Maintainer: Seth Falcon <sfalcon@fhcrc.org>
 License: LGPL
 Depends: R (>= 2.1.0), graph
 SaveImage: yes
-Collate: AllClasses.R AllGenerics.R
+Collate: AllClasses.R 
+         AllGenerics.R
+         kCores.R
          methods-Hyperedge.R 
          methods-Hypergraph.R
 biocViews: Infrastructure, GraphsAndNetworks
