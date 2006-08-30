@@ -4,10 +4,10 @@
 \description{Find all the k-cores in a hypergraph }
 }
 \usage{
-kCoresHypergraph(g)
+kCoresHypergraph(hg)
 }
 \arguments{
-  \item{g}{an instance of the \code{Hypergraph} class }
+  \item{hg}{an instance of the \code{Hypergraph} class }
 }
 \details{
 A k-core in a hypergraph is a maximal subhypergraph where (a) no hyperedge 
@@ -31,7 +31,6 @@ A hypergraph model for the yeast protein complex network,  Ramadan, E.   Tarafda
 
 \examples{
 kcoex <- fromGXL(file(system.file("XML/snacoreex.gxl",package="RBGL")))
-kCores(kcoex)
 
 # to turn the above graph to a hypergraph
 # this is a rough example 

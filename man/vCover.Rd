@@ -4,19 +4,24 @@
 \description{Approximate minimum weight vertex cover in a hypergraph }
 }
 \usage{
-vCoverHypergraph(g)
+vCoverHypergraph(hg, vW=rep(1, numNodes(hg)))
 }
 \arguments{
-  \item{g}{an instance of the \code{Hypergraph} class }
+  \item{hg}{an instance of the \code{Hypergraph} class }
+  \item{vW}{vertex weights}
 }
 \details{
-TO BE IMPLEMENTED
+Hypergraph \code{g} has non-negative weights on its vertices.
+The minimum weight vertex cover problem is to find a subset of vertices C 
+such that C includes at least one vertex from each hyperedge and the sum of 
+the weights of the vertices in C is minimum.  This problem is NP-hard.
 
-The implementation is based on the algorithm by E. Ramadan, A. Tarafdar, A. Pothen, 2004.
+We implement the greedy algorithm to approximate near-optimal solution, 
+proposed by E. Ramadan, A. Tarafdar, A. Pothen, 2004.
 
 }
 \value{
-TO BE IMPLEMENTED
+A list of vertices from hypergraph \code{g}.
 }
 
 \references{
@@ -29,7 +34,6 @@ A hypergraph model for the yeast protein complex network,  Ramadan, E.   Tarafda
 
 \examples{
 kcoex <- fromGXL(file(system.file("XML/snacoreex.gxl",package="RBGL")))
-vCover(kcoex)
 
 # to turn the above graph to a hypergraph
 # this is a rough example 

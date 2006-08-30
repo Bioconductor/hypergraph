@@ -94,6 +94,16 @@ kCoresHypergraph <- function(hg)
 # cover of a hypergraph
 # ===================================================================
 #   
+# F[i] is the set of hy[eredges not yet covered by a partial vertex cover
+# at the begining of the i-th iteration
+#
+# cost function alpha(v) = w(v) / | adj(v) intersect F[i] |
+# which distributes the weight of the vertex equally among the hyperedges 
+# it belongs to that are currently uncovered.
+#
+# at each step, it chooses a vertex with minimum cost alpha(v) to include 
+# in the partial cover, deletes all hyperedges it covers
+#
 #   initialize:
 #      i = 1; // iteration number
 #      C = 0; // cover
@@ -110,7 +120,38 @@ kCoresHypergraph <- function(hg)
 #      }
 #   }
 #   
-vCoverHypergraph <- function(hypergraph)
+
+vCoverHypergraph <- function(hg, vW=rep(1, numNodes(hg)))
 {
+   V <- nodes(hg)
+   im <- inciMat(hg)
+
+   names(vW) = V
+   deg <- rowSums(im)
+   C <- names(which(deg == 0))
+   F <- setdiff(V, C)
+
+   while ( length(F) > 1 ) 
+   {
+	  # choose a vectex v[i] with min cost alpha(v)
+	  deg <- rowSums(im)
+	  vW_cur <- vW / deg
+	  v <- names(which.min(vW_cur))
+
+	  C <- c(C, v)
+
+	  adj_he = names(which(im[v,] == 1))
+
+	  im[v, ] = 0
+	  im[, adj_he] = 0
+
+	  r_chosen <- names(which(rowSums(im) > 0))
+	  c_chosen <- names(which(colSums(im) > 0))
+	  im <- as.matrix(im[r_chosen, c_chosen])
+
+	  vW <- vW[r_chosen]
+	  F = r_chosen
+   }
+   C
 }
 
