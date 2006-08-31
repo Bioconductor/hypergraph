@@ -30,11 +30,9 @@ A hypergraph model for the yeast protein complex network,  Ramadan, E.   Tarafda
 \seealso{}
 
 \examples{
-kcoex <- fromGXL(file(system.file("XML/snacoreex.gxl",package="RBGL")))
-
-# to turn the above graph to a hypergraph
+# to turn the snacoreex.gxl (from RBGL package) graph to a hypergraph
 # this is a rough example 
-kc_hg_n <- nodes(kcoex)
+kc_hg_n <- c("A", "C", "B", "E", "F", "D", "G", "H", "J", "K", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U")
 kc_hg_e <- list(c("A", "C"), c("B", "C"), c("C", "E"), c("C", "F"), c("E", "D"), c("E", "F"), c("D", "G"), c("D", "H"), c("D", "J"), c("H", "G"), c("H", "J"), c("G", "J"), c("J", "M"), c("J", "K"), c("M", "K"), c("M", "O"), c("M", "N"), c("K", "N"), c("K", "F"), c("K", "I"), c("K", "L"), c("F", "I"), c("I", "L"), c("F", "L"), c("P", "Q"), c("Q", "R"), c("Q", "S"), c("R", "T"), c("S", "T"))
 kc_hg_he <- lapply(kc_hg_e, "Hyperedge")
 kc_hg <- new("Hypergraph", nodes=kc_hg_n, hyperedges=kc_hg_he)
