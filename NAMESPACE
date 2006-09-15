@@ -1,5 +1,3 @@
-import(methods, graph)
-
 exportClasses(Hypergraph, Hyperedge, DirectedHyperedge)
 
 exportMethods(
