@@ -1,18 +1,8 @@
 ## FIXME: Is there a way to ask for the generic from package graph?  That's
 ## the one we want, if defined.
-if (!isGeneric("nodes"))
-  setGeneric("nodes", function(object) standardGeneric("nodes"))
+setGeneric("label", function(object) standardGeneric("label"))
 
 
-if (!isGeneric("numNodes"))
-  setGeneric("numNodes", function(object) standardGeneric("numNodes"))
-
-
-if (!isGeneric("label"))
-  setGeneric("label", function(object) standardGeneric("label"))
-
-
-if (!isGeneric("label<-"))
 setGeneric("label<-", function(object, value) standardGeneric("label<-"))
 
 

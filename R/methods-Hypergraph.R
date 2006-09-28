@@ -58,11 +58,11 @@ setMethod("hyperedgeLabels", signature(.Object="Hypergraph"),
           function(.Object) sapply(.Object@hyperedges, label))
 
 
-setMethod("nodes", signature(object="Hypergraph"), function(object)
+setMethod(graph::nodes, signature(object="Hypergraph"), function(object)
           object@nodes)
 
 
-setMethod("numNodes", signature(object="Hypergraph"),
+setMethod(graph::numNodes, signature(object="Hypergraph"),
           function(object) length(object@nodes))
 
 

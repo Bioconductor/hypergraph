@@ -2,6 +2,8 @@
 \docType{class}
 \alias{Hyperedge-class}
 \alias{initialize,Hyperedge-method}
+
+\alias{label}
 \alias{label,Hyperedge-method}
 \alias{label<-}
 \alias{label<-,Hyperedge,character-method}
