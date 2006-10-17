@@ -18,7 +18,7 @@ myCheckException <- function (expr, msg, silent=TRUE) {
 }
 
 TEST_DATA_DIR <- "data"
-runitPat <- ".*_test\.[rR]$"
+runitPat <- ".*_test\\.[rR]$"
 runitDirs <- c(".")
 suite <- defineTestSuite(name="hypergraph Test Suite",
                          dirs=runitDirs,
