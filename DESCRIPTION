@@ -8,7 +8,7 @@ Description: A package that implements some simple capabilities for
 Maintainer: Seth Falcon <sfalcon@fhcrc.org>
 License: LGPL
 Depends: R (>= 2.1.0), methods, graph
-SaveImage: yes
+LazyLoad: yes
 Collate: AllClasses.R 
          AllGenerics.R
          kCores.R
