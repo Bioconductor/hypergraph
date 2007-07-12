@@ -2,7 +2,6 @@
 \alias{kCoresHypergraph}
 \title{Find all the k-cores in a hypergraph}
 \description{Find all the k-cores in a hypergraph }
-}
 \usage{
 kCoresHypergraph(hg)
 }

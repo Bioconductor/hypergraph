@@ -2,7 +2,6 @@
 \alias{vCoverHypergraph}
 \title{Approximate minimum weight vertex cover in a hypergraph}
 \description{Approximate minimum weight vertex cover in a hypergraph }
-}
 \usage{
 vCoverHypergraph(hg, vW=rep(1, numNodes(hg)))
 }
