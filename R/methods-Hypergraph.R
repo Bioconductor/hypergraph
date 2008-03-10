@@ -19,12 +19,12 @@ Hypergraph <- function(nodes, hyperedges) {
 }
 
 
-checkValidHyperedges <- function(hyperedges, nodes) {
+checkValidHyperedges <- function(hyperedges, nnodes) {
     goodHyperedges <- lapply(hyperedges, is, "Hyperedge")
     if (!all(goodHyperedges))
       stop("hyperedge list elements must be instances of the Hyperedge class.")
     hyperedgeSet <- unlist(lapply(hyperedges, nodes))
-    unknownNodes <- !(hyperedgeSet %in% nodes)
+    unknownNodes <- !(hyperedgeSet %in% nnodes)
     if (any(unknownNodes)) {
         unknownNodes <- hyperedgeSet[unknownNodes]
         msg <- paste("The hyperedge list is not valid because it",
