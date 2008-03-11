@@ -20,7 +20,7 @@ Hypergraph <- function(nodes, hyperedges) {
 
 
 checkValidHyperedges <- function(hyperedges, nnodes) {
-    goodHyperedges <- lapply(hyperedges, is, "Hyperedge")
+    goodHyperedges <- unlist(lapply(hyperedges, is, "Hyperedge"))
     if (!all(goodHyperedges))
       stop("hyperedge list elements must be instances of the Hyperedge class.")
     hyperedgeSet <- unlist(lapply(hyperedges, nodes))
@@ -101,7 +101,7 @@ setMethod("toGraphNEL", signature(.Object="Hypergraph"),
               hnEdgeL <- vector(mode="list", length=length(nodes(.Object)))
               names(hnEdgeL) <- nodes(.Object)
               for (i in 1:length(hEdges)) {
-                  he = hEdges[[i]]
+                  he <- hEdges[[i]]
                   heNode <- hEdgeNames[i]
                   heNodeIndex <- which(heNode == bpgNodes)
                   for (n in nodes(he))
