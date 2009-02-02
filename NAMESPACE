@@ -13,7 +13,8 @@ exportMethods(
    tail, 
    hyperedges,
    numNodes, 
-   inciMat, 
+   inciMat,
+   inciMat2HG,
    initialize, 
    toGraphNEL, 
    hyperedgeLabels

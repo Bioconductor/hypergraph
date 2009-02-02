@@ -4,6 +4,8 @@
 \alias{hyperedges,Hypergraph-method}
 \alias{inciMat}
 \alias{inciMat,Hypergraph-method}
+\alias{inciMat2HG}
+\alias{inciMat2HG,matrix-method}
 \alias{initialize,Hypergraph-method}
 \alias{nodes,Hypergraph-method}
 \alias{numNodes,Hypergraph-method}
@@ -45,6 +47,8 @@ argument must be a list of \code{\link{Hyperedge-class}} objects.
 
     \item{inciMat}{\code{signature(.Object = "Hypergraph")}: Return the
     incidence matrix representation of this hypergraph }
+    \item{inciMat2HG}{\code{signature(.Object = "matrix")}: Return the
+    hypergraph representation of this incidence matrix }
     \item{initialize}{\code{signature(.Object = "Hypergraph")}: Create
     an instance}
     \item{nodes}{\code{signature(object = "Hypergraph")}: Return the

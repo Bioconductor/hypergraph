@@ -73,6 +73,16 @@ setMethod("inciMat", signature(.Object="Hypergraph"),
               createInciMat(nds, hEdgeList)
           })
 
+setMethod("inciMat2HG", signature(.Object="matrix"),
+          function(.Object){
+              rn <- rownames(.Object)
+              hgList <- apply(.Object, 2, function(x){
+                  names(which(x == 1))
+              })
+              heList <- l2hel(hgList)
+              hg <- Hypergraph(rn, heList)
+              hg
+          })
 
 createInciMat <- function(nodes, edgeList) {
     inciMat <- matrix(0, nrow=length(nodes), ncol=length(edgeList))

@@ -25,4 +25,7 @@ setGeneric("hyperedgeLabels",
 setGeneric("inciMat", function(.Object) standardGeneric("inciMat"))
 
 
+setGeneric("inciMat2HG", function(.Object) standardGeneric("inciMat2HG"))
+
+
 setGeneric("toGraphNEL", function(.Object) standardGeneric("toGraphNEL"))
