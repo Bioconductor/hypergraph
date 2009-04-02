@@ -1,4 +1,4 @@
-setMethod("initialize", "Hypergraph", function(.Object, nodes, hyperedges) {
+setMethod("initialize", "Hypergraph", function(.Object, nodes=character(), hyperedges=list()) {
     ## Create a new hypergraph instance.
     ##
     ##      nodes: character vector of node names
@@ -37,7 +37,7 @@ checkValidHyperedges <- function(hyperedges, nnodes) {
 
 
 addDefaultHyperedgeLabels <- function(hyperedges) {
-    for (i in 1:length(hyperedges)) {
+    for (i in seq_len(length(hyperedges))) {
         hEdge <- hyperedges[[i]]
         lab <- label(hEdge)
         if (is.null(lab) || length(lab) < 1 || lab == "") {
