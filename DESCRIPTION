@@ -1,6 +1,6 @@
 Package: hypergraph
 Title: A package providing hypergraph data structures
-Version: 1.18.0
+Version: 1.19.0
 Author: Seth Falcon, Robert Gentleman
 Description: A package that implements some simple capabilities for
              representing and manipulating hypergraphs.
