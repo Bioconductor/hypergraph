@@ -4,7 +4,7 @@ Version: 1.21.0
 Author: Seth Falcon, Robert Gentleman
 Description: A package that implements some simple capabilities for
              representing and manipulating hypergraphs.
-Maintainer: Robert Gentleman <rgentlem@fhcrc.org>
+Maintainer: Biocore Team c/o BioC user list <bioconductor@stat.math.ethz.ch>
 License: Artistic-2.0
 Depends: R (>= 2.1.0), methods, graph
 LazyLoad: yes
