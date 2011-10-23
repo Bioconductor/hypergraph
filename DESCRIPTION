@@ -1,10 +1,10 @@
 Package: hypergraph
 Title: A package providing hypergraph data structures
-Version: 1.25.0
+Version: 1.25.1
 Author: Seth Falcon, Robert Gentleman
 Description: A package that implements some simple capabilities for
              representing and manipulating hypergraphs.
-Maintainer: Biocore Team c/o BioC user list <bioconductor@stat.math.ethz.ch>
+Maintainer: Bioconductor Package Maintainer <maintainer@bioconductor.org>
 License: Artistic-2.0
 Depends: R (>= 2.1.0), methods, graph
 LazyLoad: yes
