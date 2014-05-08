@@ -72,12 +72,12 @@ setMethod("toUndirected", signature(.Object="DirectedHyperedge"),
           })
           
 
-setMethod("head", signature(.Object="DirectedHyperedge"),
-          function(.Object) .Object@head)
+setMethod("head", signature(x="DirectedHyperedge"),
+          function(x) x@head)
 
 
-setMethod("tail", signature(.Object="DirectedHyperedge"),
-          function(.Object) .Object@tail)
+setMethod("tail", signature(x="DirectedHyperedge"),
+          function(x) x@tail)
 
 
 setMethod("show", "DirectedHyperedge", function(object) {

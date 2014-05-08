@@ -33,10 +33,10 @@ Class \code{"Hyperedge"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{head}{\code{signature(.Object = "DirectedHyperedge")}: Return a
+    \item{head}{\code{signature(x = "DirectedHyperedge")}: Return a
       vector containing the nodes in the head of the hyperedge}
 
-    \item{tail}{\code{signature(.Object = "DirectedHyperedge")}: Return a
+    \item{tail}{\code{signature(x = "DirectedHyperedge")}: Return a
       vector containing the nodes in the tail of the hyperedge}
 
     \item{initialize}{\code{signature(.Object = "DirectedHyperedge")}:

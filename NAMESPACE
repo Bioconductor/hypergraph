@@ -1,4 +1,5 @@
 import(methods)
+importFrom(utils, head, tail)
 import(graph)
 
 exportClasses(Hypergraph, Hyperedge, DirectedHyperedge)

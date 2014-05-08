@@ -9,12 +9,6 @@ setGeneric("label<-", function(object, value) standardGeneric("label<-"))
 setGeneric("toUndirected", function(.Object) standardGeneric("toUndirected"))
 
 
-setGeneric("head", function(.Object) standardGeneric("head"))
-
-
-setGeneric("tail", function(.Object) standardGeneric("tail"))
-
-
 setGeneric("hyperedges", function(.Object) standardGeneric("hyperedges"))
 
 
