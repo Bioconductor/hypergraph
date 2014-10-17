@@ -25,20 +25,17 @@ testDirectedHypergraph <- function() {
 
 testHyperedges <- function() {
     nodes <- LETTERS[1:4]
-##    hEdges <- lapply(list("A", LETTERS[1:2], LETTERS[3:4]), "Hyperedge")
     eList <- list("A", LETTERS[1:2], LETTERS[3:4])
     hEdges <- l2hel(eList)
     hg <- new("Hypergraph", nodes=nodes, hyperedges=hEdges)
     ## Add "default" labels
-    for (i in 1:length(hEdges)) {
+    for (i in seq_along(hEdges)) {
         he <- hEdges[[i]]
         label(he) <- as.character(i)
         hEdges[[i]] <- he
     }
     checkEquals(hEdges, hyperedges(hg))
-    names(eList) <- paste("e", 1:length(eList), sep="")
-    hEdges <- l2hel(eList)
-    checkEquals(names(eList), hyperedgeLabels(hg))
+    checkEquals(as.character(seq_along(eList)), hyperedgeLabels(hg))
 }
 
 
