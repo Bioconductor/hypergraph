@@ -29,8 +29,6 @@ A hypergraph model for the yeast protein complex network,  Ramadan, E.   Tarafda
 
 \author{Li Long <li.long@isb-sib.ch>}
 
-\seealso{}
-
 \examples{
 # to turn the snacoreex.gxl graph (from RBGL package) to a hypergraph
 # this is a rough example 
